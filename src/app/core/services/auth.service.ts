@@ -12,9 +12,7 @@ import {
   ApiResponse,
 } from '../models';
 import { environment } from '../../../environments/environment';
-
-const TOKEN_KEY = 'airisk_token';
-const USER_KEY = 'airisk_user';
+import { STORAGE_KEYS } from '../constants/storage.constants';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -29,7 +27,7 @@ export class AuthService {
   ) {}
 
   get token(): string | null {
-    return localStorage.getItem(TOKEN_KEY);
+    return localStorage.getItem(STORAGE_KEYS.TOKEN);
   }
 
   get isLoggedIn(): boolean {
@@ -65,20 +63,20 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(USER_KEY);
+    localStorage.removeItem(STORAGE_KEYS.TOKEN);
+    localStorage.removeItem(STORAGE_KEYS.USER);
     this._user$.next(null);
     this.router.navigate(['/auth/login']);
   }
 
   private storeSession(auth: AuthResponse): void {
-    localStorage.setItem(TOKEN_KEY, auth.accessToken);
-    localStorage.setItem(USER_KEY, JSON.stringify(auth.user));
+    localStorage.setItem(STORAGE_KEYS.TOKEN, auth.accessToken);
+    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(auth.user));
     this._user$.next(auth.user);
   }
 
   private storedUser(): UserResponse | null {
-    const raw = localStorage.getItem(USER_KEY);
+    const raw = localStorage.getItem(STORAGE_KEYS.USER);
     return raw ? JSON.parse(raw) : null;
   }
 }
