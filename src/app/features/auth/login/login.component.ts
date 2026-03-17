@@ -95,7 +95,6 @@ export class LoginComponent {
     this.authService.login(this.form.value as LoginDto).subscribe({
       next: () => this.router.navigate(['/dashboard']),
       error: (err) => {
-        console.log(err.error);
         this.error = err.error?.message || 'Invalid email or password';
         this.loading = false;
         this.cdr.detectChanges();
