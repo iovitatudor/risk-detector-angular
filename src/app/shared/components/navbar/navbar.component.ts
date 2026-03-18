@@ -47,6 +47,14 @@ import { AuthService } from '../../../core/services/auth.service';
               <span class="text-sm text-slate-400">
                 {{ user.isGuest ? 'Guest' : user.firstName }}
               </span>
+              @if (user.isGuest) {
+                <a
+                  routerLink="/auth/register"
+                  class="text-sm bg-violet-600 hover:bg-violet-500 text-white px-4 py-1.5 rounded-lg transition-colors"
+                >
+                  Upgrade
+                </a>
+              }
               <button
                 (click)="logout()"
                 class="text-sm text-slate-500 hover:text-red-400 transition-colors"
