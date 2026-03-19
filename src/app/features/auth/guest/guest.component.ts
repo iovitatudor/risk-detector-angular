@@ -77,12 +77,14 @@ export class GuestComponent implements OnInit {
 
   private getFingerprint(): string {
     const stored = localStorage.getItem(STORAGE_KEYS.FINGERPRINT);
+
     if (stored) return stored;
 
-    const fp = btoa(`${navigator.userAgent}-${screen.width}x${screen.height}-${Date.now()}`).slice(
+    const fp = btoa(`${Date.now()}-${navigator.userAgent}-${screen.width}x${screen.height}`).slice(
       0,
       32,
-    );
+    ); d
+
     localStorage.setItem(STORAGE_KEYS.FINGERPRINT, fp);
     return fp;
   }
