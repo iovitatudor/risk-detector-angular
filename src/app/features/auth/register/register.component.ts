@@ -208,7 +208,10 @@ export class RegisterComponent {
       const dto: UpgradeGuestDto = { firstName, lastName, email, password, fingerprint };
       console.log(fingerprint);
       this.authService.upgradeGuest(dto).subscribe({
-        next: () => this.router.navigate(['/overview']),
+        next: () => {
+          localStorage.removeItem(STORAGE_KEYS.FINGERPRINT);
+          this.router.navigate(['/overview']);
+        },
         error: (err) => {
           this.error = err.error?.message || 'Upgrade failed';
           this.loading = false;
