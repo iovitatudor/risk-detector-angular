@@ -13,7 +13,7 @@ import { AuthService } from '../../../core/services/auth.service';
     >
       <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <!-- Logo -->
-        <a routerLink="/dashboard" class="flex items-center gap-2">
+        <a routerLink="/overview" class="flex items-center gap-2">
           <div class="w-7 h-7 rounded-lg bg-violet-600 flex items-center justify-center">
             <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
