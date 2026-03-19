@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, AsyncPipe],
   template: `
     <div class="bg-slate-950 text-white">
       <!-- Hero -->
@@ -29,7 +30,14 @@ import { AuthService } from '../../core/services/auth.service';
             structured risk report in seconds — financial, legal, and operational.
           </p>
 
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          @if (user$ | async) {
+            <a
+              routerLink="/overview"
+              class="w-full sm:w-auto bg-violet-600 hover:bg-violet-500 text-white font-medium px-8 py-3 rounded-xl transition-colors text-sm"
+            >
+              Go to overview
+            </a>
+          } @else {
             <a
               routerLink="/auth/register"
               class="w-full sm:w-auto bg-violet-600 hover:bg-violet-500 text-white font-medium px-8 py-3 rounded-xl transition-colors text-sm"
@@ -42,7 +50,7 @@ import { AuthService } from '../../core/services/auth.service';
             >
               Try as guest
             </a>
-          </div>
+          }
 
           <p class="text-slate-600 text-xs mt-6">No credit card required</p>
         </div>
@@ -278,19 +286,29 @@ import { AuthService } from '../../core/services/auth.service';
           <p class="text-slate-400 text-lg mb-10">
             Join thousands of decision-makers who use AIRisk to make smarter, safer choices.
           </p>
+
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              routerLink="/auth/register"
-              class="w-full sm:w-auto bg-violet-600 hover:bg-violet-500 text-white font-medium px-8 py-3 rounded-xl transition-colors text-sm"
-            >
-              Create free account
-            </a>
-            <a
-              routerLink="/auth/guest"
-              class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium px-8 py-3 rounded-xl transition-colors text-sm"
-            >
-              Try as guest
-            </a>
+            @if (user$ | async) {
+              <a
+                routerLink="/overview"
+                class="w-full sm:w-auto bg-violet-600 hover:bg-violet-500 text-white font-medium px-8 py-3 rounded-xl transition-colors text-sm"
+              >
+                Go to overview
+              </a>
+            } @else {
+              <a
+                routerLink="/auth/register"
+                class="w-full sm:w-auto bg-violet-600 hover:bg-violet-500 text-white font-medium px-8 py-3 rounded-xl transition-colors text-sm"
+              >
+                Create free account
+              </a>
+              <a
+                routerLink="/auth/guest"
+                class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium px-8 py-3 rounded-xl transition-colors text-sm"
+              >
+                Try as guest
+              </a>
+            }
           </div>
         </div>
       </section>
@@ -318,5 +336,9 @@ import { AuthService } from '../../core/services/auth.service';
   `,
 })
 export class HomeComponent {
-  constructor(private authService: AuthService) {}
+  user$;
+
+  constructor(private authService: AuthService) {
+    this.user$ = this.authService.user$;
+  }
 }
