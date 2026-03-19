@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `<p class="text-white p-8">Dashboard — coming soon</p>`,
 })
-export class DashboardComponent {}
+export class OverviewComponent {}
