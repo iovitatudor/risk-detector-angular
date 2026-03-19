@@ -58,7 +58,7 @@ export class GuestComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/overview']);
     }
   }
 
@@ -67,7 +67,7 @@ export class GuestComponent implements OnInit {
     this.error = '';
 
     this.authService.loginGuest({ fingerprint: this.getFingerprint() }).subscribe({
-      next: () => this.router.navigate(['/dashboard']),
+      next: () => this.router.navigate(['/overview']),
       error: (err) => {
         this.error = err.error?.message || 'Could not start guest session';
         this.loading = false;
