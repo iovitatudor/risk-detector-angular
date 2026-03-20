@@ -29,28 +29,29 @@ import { AsyncPipe } from '@angular/common';
             AIRisk analyzes your business scenarios using advanced AI and gives you a clear,
             structured risk report in seconds — financial, legal, and operational.
           </p>
-
-          @if (user$ | async) {
-            <a
-              routerLink="/overview"
-              class="w-full sm:w-auto bg-violet-600 hover:bg-violet-500 text-white font-medium px-8 py-3 rounded-xl transition-colors text-sm"
-            >
-              Go to overview
-            </a>
-          } @else {
-            <a
-              routerLink="/auth/register"
-              class="w-full sm:w-auto bg-violet-600 hover:bg-violet-500 text-white font-medium px-8 py-3 rounded-xl transition-colors text-sm"
-            >
-              Get started free
-            </a>
-            <a
-              routerLink="/auth/guest"
-              class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium px-8 py-3 rounded-xl transition-colors text-sm"
-            >
-              Try as guest
-            </a>
-          }
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            @if (user$ | async) {
+              <a
+                routerLink="/overview"
+                class="w-full sm:w-auto bg-violet-600 hover:bg-violet-500 text-white font-medium px-8 py-3 rounded-xl transition-colors text-sm"
+              >
+                Go to overview
+              </a>
+            } @else {
+              <a
+                routerLink="/auth/register"
+                class="w-full sm:w-auto bg-violet-600 hover:bg-violet-500 text-white font-medium px-8 py-3 rounded-xl transition-colors text-sm"
+              >
+                Get started free
+              </a>
+              <a
+                routerLink="/auth/guest"
+                class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium px-8 py-3 rounded-xl transition-colors text-sm"
+              >
+                Try as guest
+              </a>
+            }
+          </div>
 
           <p class="text-slate-600 text-xs mt-6">No credit card required</p>
         </div>
@@ -300,7 +301,7 @@ import { AsyncPipe } from '@angular/common';
                 routerLink="/auth/register"
                 class="w-full sm:w-auto bg-violet-600 hover:bg-violet-500 text-white font-medium px-8 py-3 rounded-xl transition-colors text-sm"
               >
-                Create free account
+                Get started free
               </a>
               <a
                 routerLink="/auth/guest"
