@@ -83,7 +83,7 @@ export class GuestComponent implements OnInit {
     const fp = btoa(`${Date.now()}-${navigator.userAgent}-${screen.width}x${screen.height}`).slice(
       0,
       32,
-    ); d
+    );
 
     localStorage.setItem(STORAGE_KEYS.FINGERPRINT, fp);
     return fp;
