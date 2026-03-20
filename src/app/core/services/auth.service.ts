@@ -66,7 +66,7 @@ export class AuthService {
     localStorage.removeItem(STORAGE_KEYS.TOKEN);
     localStorage.removeItem(STORAGE_KEYS.USER);
     this._user$.next(null);
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/']);
   }
 
   private storeSession(auth: AuthResponse): void {

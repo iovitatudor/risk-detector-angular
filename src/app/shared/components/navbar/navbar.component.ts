@@ -13,7 +13,7 @@ import { AuthService } from '../../../core/services/auth.service';
     >
       <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <!-- Logo -->
-        <a routerLink="/dashboard" class="flex items-center gap-2">
+        <a routerLink="/" class="flex items-center gap-2">
           <div class="w-7 h-7 rounded-lg bg-violet-600 flex items-center justify-center">
             <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
@@ -27,7 +27,6 @@ import { AuthService } from '../../../core/services/auth.service';
           <span class="text-white font-semibold tracking-tight">AIRisk</span>
         </a>
 
-        <!-- Logged in -->
         @if (user$ | async; as user) {
           <div class="flex items-center gap-4">
             <a
@@ -49,7 +48,7 @@ import { AuthService } from '../../../core/services/auth.service';
               </span>
               @if (user.isGuest) {
                 <a
-                  routerLink="/auth/register"
+                  routerLink="/upgrade"
                   class="text-sm bg-violet-600 hover:bg-violet-500 text-white px-4 py-1.5 rounded-lg transition-colors"
                 >
                   Upgrade
@@ -63,10 +62,7 @@ import { AuthService } from '../../../core/services/auth.service';
               </button>
             </div>
           </div>
-        }
-
-        <!-- Logged out -->
-        @if ((user$ | async) === null) {
+        } @else {
           <div class="flex items-center gap-3">
             <a
               routerLink="/auth/login"
@@ -94,6 +90,7 @@ export class NavbarComponent {
     private router: Router,
   ) {
     this.user$ = this.authService.user$;
+    this.user$.subscribe((u) => console.log('navbar user:', JSON.stringify(u)));
   }
 
   logout(): void {

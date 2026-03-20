@@ -208,7 +208,10 @@ export class RegisterComponent {
       const dto: UpgradeGuestDto = { firstName, lastName, email, password, fingerprint };
       console.log(fingerprint);
       this.authService.upgradeGuest(dto).subscribe({
-        next: () => this.router.navigate(['/dashboard']),
+        next: () => {
+          localStorage.removeItem(STORAGE_KEYS.FINGERPRINT);
+          this.router.navigate(['/overview']);
+        },
         error: (err) => {
           this.error = err.error?.message || 'Upgrade failed';
           this.loading = false;
@@ -219,7 +222,7 @@ export class RegisterComponent {
       const dto: RegisterDto = { firstName, lastName, email, password };
 
       this.authService.register(dto).subscribe({
-        next: () => this.router.navigate(['/dashboard']),
+        next: () => this.router.navigate(['/overview']),
         error: (err) => {
           this.error = err.error?.message || 'Registration failed';
           this.loading = false;

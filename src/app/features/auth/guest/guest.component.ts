@@ -58,7 +58,7 @@ export class GuestComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/overview']);
     }
   }
 
@@ -67,7 +67,7 @@ export class GuestComponent implements OnInit {
     this.error = '';
 
     this.authService.loginGuest({ fingerprint: this.getFingerprint() }).subscribe({
-      next: () => this.router.navigate(['/dashboard']),
+      next: () => this.router.navigate(['/overview']),
       error: (err) => {
         this.error = err.error?.message || 'Could not start guest session';
         this.loading = false;
@@ -77,12 +77,14 @@ export class GuestComponent implements OnInit {
 
   private getFingerprint(): string {
     const stored = localStorage.getItem(STORAGE_KEYS.FINGERPRINT);
+
     if (stored) return stored;
 
-    const fp = btoa(`${navigator.userAgent}-${screen.width}x${screen.height}-${Date.now()}`).slice(
+    const fp = btoa(`${Date.now()}-${navigator.userAgent}-${screen.width}x${screen.height}`).slice(
       0,
       32,
     );
+
     localStorage.setItem(STORAGE_KEYS.FINGERPRINT, fp);
     return fp;
   }
