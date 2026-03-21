@@ -16,5 +16,29 @@ export const routes: Routes = [
       import('./features/dashboard/overview.component').then((m) => m.OverviewComponent),
     canActivate: [authGuard],
   },
+  {
+    path: 'scenarios',
+    loadComponent: () =>
+      import('./features/scenarios/scenario-list/scenario-list.component').then(
+        (m) => m.ScenarioListComponent,
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'scenarios/new',
+    loadComponent: () =>
+      import('./features/scenarios/scenario-create/scenario-create.component').then(
+        (m) => m.ScenarioCreateComponent,
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'scenarios/:id',
+    loadComponent: () =>
+      import('./features/scenarios/scenario-detail/scenario-detail.component').then(
+        (m) => m.ScenarioDetailComponent,
+      ),
+    canActivate: [authGuard],
+  },
   { path: '**', redirectTo: '/' },
 ];
